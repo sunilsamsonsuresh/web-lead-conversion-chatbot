@@ -1,0 +1,17 @@
+id,context,answer
+1,hello,hello! hope you are doing good. How can I help you?
+2,hey,hello! hope you are doing good. How can I help you?
+3,What is your name?,I am Jobbatical platform chatbot and here to help you
+4,Thank you,You are welcome. Please me know if you need any other help.
+5,Agent,Would you like us to answer a query or are you looking to be connected to the agent?
+6,How do I contact a support agent? ,"You may please message us at [support@jobbatical.com](https://app.jobbatical.com/w3odv4/inbox/messages/new-message?messageToSupport=true) via the platform and our team will get in touch with you soon.
+Or you can directly tag support team via @cs on slack under #product-general channel."
+7,hey there,Hey there! How can I help you today?
+8,hello there,Hello there! How can I assist you today?
+9,hi,Hi there! How can I assist you today?
+10,good morning,Good morning! What can I do for you today?
+11,good afternoon,Good afternoon! How can I help you today?
+12,good evening,Good evening! How can I assist you today?
+13,thanks,You're welcome! How else can I assist you?
+14,thanks a lot,You're very welcome! Let me know if you need anything else.
+15,thank you very much,You're very welcome! How can I assist you further?
