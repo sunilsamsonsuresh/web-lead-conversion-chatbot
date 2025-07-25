@@ -43,47 +43,47 @@ class ToolExecutor:
         tool_sequence = []
         step_output = None
 
-        # # 1. Try service_qa first
-        # service_qa_tool = tool_map.get('service_qa')
-        # if not service_qa_tool:
-        #     logger.error("service_qa tool not found.")
-        #     return None, tool_outputs, tool_sequence
+        # 1. Try service_qa first
+        service_qa_tool = tool_map.get('service_qa')
+        if not service_qa_tool:
+            logger.error("service_qa tool not found.")
+            return None, tool_outputs, tool_sequence
 
-        # tool_sequence.append('service_qa')
-        # try:
-        #     if st is not None:
-        #         with st.spinner("Running service_qa..."):
-        #             step_output = await self.execute_tool(service_qa_tool, (message, session_id))
-        #     else:
-        #         step_output = await self.execute_tool(service_qa_tool, (message, session_id))
-        #     tool_outputs['service_qa'] = step_output
-        # except Exception as e:
-        #     logger.error(f"Error executing service_qa: {e}")
-        #     if st is not None:
-        #         st.error(f"Error executing service_qa: {e}")
-        #     step_output = None
+        tool_sequence.append('service_qa')
+        try:
+            if st is not None:
+                with st.spinner("Running service_qa..."):
+                    step_output = await self.execute_tool(service_qa_tool, (message, session_id))
+            else:
+                step_output = await self.execute_tool(service_qa_tool, (message, session_id))
+            tool_outputs['service_qa'] = step_output
+        except Exception as e:
+            logger.error(f"Error executing service_qa: {e}")
+            if st is not None:
+                st.error(f"Error executing service_qa: {e}")
+            step_output = None
 
-        # # Check for source_nodes in step_output
-        # has_sources = False
-        # source_nodes = None
-        # if step_output is not None:
-        #     if hasattr(step_output, "source_nodes"):
-        #         source_nodes = getattr(step_output, "source_nodes", None)
-        #     elif isinstance(step_output, dict) and "source_nodes" in step_output:
-        #         source_nodes = step_output["source_nodes"]
-        #     if source_nodes and isinstance(source_nodes, (list, tuple)) and len(source_nodes) > 0:
-        #         has_sources = True
+        # Check for source_nodes in step_output
+        has_sources = False
+        source_nodes = None
+        if step_output is not None:
+            if hasattr(step_output, "source_nodes"):
+                source_nodes = getattr(step_output, "source_nodes", None)
+            elif isinstance(step_output, dict) and "source_nodes" in step_output:
+                source_nodes = step_output["source_nodes"]
+            if source_nodes and isinstance(source_nodes, (list, tuple)) and len(source_nodes) > 0:
+                has_sources = True
 
-        # if has_sources:
-        #     # Return the response from service_qa as the final response
-        #     if hasattr(step_output, "response"):
-        #         final_response = step_output.response
-        #     elif isinstance(step_output, dict) and "response" in step_output:
-        #         final_response = step_output["response"]
-        #     else:
-        #         final_response = step_output
-        #     logger.info("service_qa provided sources. Returning its response.")
-        #     return final_response
+        if has_sources:
+            # Return the response from service_qa as the final response
+            if hasattr(step_output, "response"):
+                final_response = step_output.response
+            elif isinstance(step_output, dict) and "response" in step_output:
+                final_response = step_output["response"]
+            else:
+                final_response = step_output
+            logger.info("service_qa provided sources. Returning its response.")
+            return final_response
 
         # 2. If no sources, try web_search
         web_search_tool = tool_map.get('web_search')
